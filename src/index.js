@@ -210,15 +210,15 @@ function domAlign(el, refNode, align) {
     // 检查反下后的位置是否可以放下了
     // 如果仍然放不下只有指定了可以调整当前方向才调整
     newOverflowCfg.adjustX = overflow.adjustX &&
-      isFailX(elFuturePos, elRegion, realXRegion);
+      isFailX(elFuturePos, elRegion, visibleRect);
 
     newOverflowCfg.adjustY = overflow.adjustY &&
-      isFailY(elFuturePos, elRegion, realYRegion);
+      isFailY(elFuturePos, elRegion, visibleRect);
 
     // 确实要调整，甚至可能会调整高度宽度
     if (newOverflowCfg.adjustX || newOverflowCfg.adjustY) {
       newElRegion = adjustForViewport(elFuturePos, elRegion,
-        realXRegion, realYRegion, newOverflowCfg);
+        {right: visibleRect.right, left: visibleRect.left}, {top: visibleRect.top, bottom: visibleRect.bottom}, newOverflowCfg);
     }
   }
 
